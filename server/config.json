@@ -1,0 +1,44 @@
+{
+  "maxsize": 4,
+  "depth": 2,
+  "servers": [
+    {
+      "id": 1,
+      "address": "127.0.0.1",
+      "listenPort": "8081",
+      "cnt": "a",
+      "neighbours": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": 2,
+      "address": "127.0.0.1",
+      "listenPort": "8082",
+      "cnt": "b",
+      "neighbours": [
+        1,
+        4
+      ]
+    },
+    {
+      "id": 3,
+      "address": "127.0.0.1",
+      "listenPort": "8083",
+      "cnt": "c",
+      "neighbours": [
+        1
+      ]
+    },
+    {
+      "id": 4,
+      "address": "127.0.0.1",
+      "listenPort": "8084",
+      "cnt": "d",
+      "neighbours": [
+        2
+      ]
+    }
+  ]
+}
