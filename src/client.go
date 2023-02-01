@@ -42,7 +42,7 @@ func startClient(network NetworkConfig) {
 			sendMessage(msg, s.Address, s.ListenPort, udp)
 		}
 
-		fmt.Println("enter server id to ask result from - enter 0 to quit")
+		fmt.Println("enter src id to ask result from - enter 0 to quit")
 		_, err = fmt.Scanln(&input)
 		if err != nil {
 			return
@@ -67,13 +67,16 @@ func startClient(network NetworkConfig) {
 				fmt.Println("response:", servMsg.Text)
 			}
 		}
-		fmt.Println("--- Result:", servMsg.Collected)
+		fmt.Println("--- Result:")
 		for k, v := range servMsg.Collected.Collect {
 			fmt.Println(k, " : ", v)
 		}
 
 	}
-	udp.Conn.Close()
+	err = udp.Conn.Close()
+	if err != nil {
+		return
+	}
 }
 
 func sendMessage(msg Message, toAddress string, toPort string, conn *UdpConn) {

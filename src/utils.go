@@ -8,7 +8,7 @@ import (
 
 func loadConfigFromFile(ntwConf *NetworkConfig) error {
 	// Get config from json config file
-	absPath, err := filepath.Abs("server\\config.json")
+	absPath, err := filepath.Abs("..\\src\\config.json")
 	if err != nil {
 		return err
 	}
@@ -36,7 +36,7 @@ func getServerConfig(id int, config *NetworkConfig) *ServerConfig {
 
 func cntChar(char uint8, text string) int {
 	cnt := 0
-	for i, _ := range text {
+	for i := range text {
 		if text[i] == char {
 			cnt++
 		}

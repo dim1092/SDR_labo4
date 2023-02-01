@@ -1,7 +1,6 @@
 package main
 
 type NetworkConfig struct {
-	Maxsize int
 	Depth   int
 	Servers []ServerConfig
 }

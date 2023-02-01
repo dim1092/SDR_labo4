@@ -14,7 +14,7 @@ type Server struct {
 }
 
 func NewServer(id int, ntwConfig *NetworkConfig) (*Server, error) {
-	// Find and set this server's config
+	// Find and set this src's config
 	for _, serv := range ntwConfig.Servers {
 		if serv.Id == id {
 			return &Server{
@@ -24,7 +24,7 @@ func NewServer(id int, ntwConfig *NetworkConfig) (*Server, error) {
 			}, nil
 		}
 	}
-	return nil, errors.New("server Id not in config file")
+	return nil, errors.New("src Id not in config file")
 
 }
 
@@ -45,11 +45,11 @@ func (s *Server) spreadResult(udp *UdpConn, c chan Message) {
 	for _, srvId := range s.config.Neighbours {
 		srv := getServerConfig(srvId, s.networkConfig)
 		if srv == nil {
-			fmt.Printf("Neighbour server with Id %v not found\n", srvId)
+			fmt.Printf("Neighbour src with Id %v not found\n", srvId)
 
 		} else {
 			if s.updateNeighbour(srv.Address, srv.ListenPort, udp) != nil {
-				fmt.Printf("error sending message to server %v\n", srvId)
+				fmt.Printf("error sending message to src %v\n", srvId)
 			}
 		}
 	}
@@ -60,7 +60,7 @@ func (s *Server) spreadResult(udp *UdpConn, c chan Message) {
 		for msg.MsgType != Update {
 			msg = <-c
 			if msg.MsgType == ReqCnt || msg.MsgType == ReqResponse {
-				// Let the client know the server is still busy
+				// Let the client know the src is still busy
 				respMsg := Message{
 					Other,
 					s.config.Address,
